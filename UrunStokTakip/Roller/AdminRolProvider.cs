@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
+using UrunStokTakip.Models;
 
 namespace UrunStokTakip.Roller
 {
@@ -37,7 +38,11 @@ namespace UrunStokTakip.Roller
 
         public override string[] GetRolesForUser(string username)
         {
-            throw new NotImplementedException();
+            Takip_SistemiEntities db = new Takip_SistemiEntities();
+            var user = db.Kullanici.FirstOrDefault(x => x.Email == username);
+
+            return new string[] { user.Rol };
+
         }
 
         public override string[] GetUsersInRole(string roleName)
