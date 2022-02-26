@@ -598,6 +598,7 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Urun\Index.cshtml" />
     <Content Include="Views\Urun\Ekle.cshtml" />
+    <Content Include="Views\Urun\Guncelle.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
