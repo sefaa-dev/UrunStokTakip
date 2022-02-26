@@ -42,7 +42,14 @@ namespace UrunStokTakip.Controllers
             db.Urun.Add(Data);
             db.SaveChanges();
 
+            return RedirectToAction("Index");
+        }
 
+        public ActionResult Sil(int id)
+        {
+            var urun = db.Urun.Where(x => x.Id == id).FirstOrDefault();
+            db.Urun.Remove(urun);
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
     }
