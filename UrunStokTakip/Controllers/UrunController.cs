@@ -22,6 +22,15 @@ namespace UrunStokTakip.Controllers
 
         public ActionResult Ekle()
         {
+            List<SelectListItem> deger1 = (from x in db.Kategori.ToList()
+
+                                           select new SelectListItem
+                                           {
+                                               Text = x.Ad,
+                                               Value = x.Id.ToString()
+                                           }).ToList();
+
+            ViewBag.ktgr = deger1;
             return View();
         }
         [HttpPost]
