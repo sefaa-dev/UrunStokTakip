@@ -14,12 +14,17 @@ namespace UrunStokTakip.Controllers
         Takip_SistemiEntities db = new Takip_SistemiEntities();
 
         [Authorize]
-        public ActionResult Index()
+        public ActionResult Index(string ara)
         {
             var list = db.Urun.ToList();
+            if (!string.IsNullOrEmpty(ara))
+            {
+                list = list.Where(x => x.Ad.Contains(ara) || x.Aciklama.Contains(ara)).ToList();
+            }
             return View(list);
         }
 
+        [Authorize(Roles = "A")]
         public ActionResult Ekle()
         {
             List<SelectListItem> deger1 = (from x in db.Kategori.ToList()
@@ -33,6 +38,8 @@ namespace UrunStokTakip.Controllers
             ViewBag.ktgr = deger1;
             return View();
         }
+
+        [Authorize(Roles = "A")]
         [HttpPost]
         public ActionResult Ekle(Urun Data, HttpPostedFileBase File)
         {
@@ -45,6 +52,7 @@ namespace UrunStokTakip.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "A")]
         public ActionResult Sil(int id)
         {
             var urun = db.Urun.Where(x => x.Id == id).FirstOrDefault();
@@ -53,6 +61,7 @@ namespace UrunStokTakip.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "A")]
         public ActionResult Guncelle(int id)
         {
             var guncelle = db.Urun.Where(x => x.Id == id).FirstOrDefault();
@@ -68,6 +77,8 @@ namespace UrunStokTakip.Controllers
 
             return View(guncelle);
         }
+
+        [Authorize(Roles = "A")]
         [HttpPost]
         public ActionResult Guncelle(Urun model, HttpPostedFileBase File)
         {
@@ -98,6 +109,25 @@ namespace UrunStokTakip.Controllers
 
             }
 
+        }
+        [Authorize(Roles = "A")]
+        public ActionResult KritikStok()
+        {
+            var kritik = db.Urun.Where(x => x.Stok <= 50).ToList();
+            return View(kritik);
+        }
+
+        public PartialViewResult StokCount()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var count = db.Urun.Where(x => x.Stok < 50).Count();
+                ViewBag.count = count;
+
+                var azalan = db.Urun.Where(x => x.Stok == 50).Count();
+                ViewBag.azalan = azalan;
+            }
+            return PartialView();
         }
     }
 }

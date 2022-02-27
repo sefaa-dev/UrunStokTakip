@@ -6,6 +6,21 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<div class="container">
+    @using (Html.BeginForm())
+            {
+    <div style="width:25%; float:left">
+        @Html.TextBox("ara", null, new { @class = "form-control", @placeholder = "Ürün adı veya açıklama arayınız" })
+        <div style="float:left">
+            <input type="submit" name="btn" value="Ara" class="btn btn-info" />
+        </div>
+        <br />
+
+    </div>
+            }
+</div>
+<br />
+
 <a href="/Urun/Ekle" class="btn btn-primary">Ekle</a>
 <br />
 <br />
