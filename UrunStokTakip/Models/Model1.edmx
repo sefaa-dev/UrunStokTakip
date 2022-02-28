@@ -12,6 +12,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Ad" Type="nvarchar" MaxLength="50" />
           <Property Name="Aciklama" Type="nvarchar" MaxLength="50" />
+          <Property Name="Durum" Type="bit" />
         </EntityType>
         <EntityType Name="Kullanici">
           <Key>
@@ -141,6 +142,7 @@
           <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Aciklama" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Urun" Relationship="Self.FK_Urun_Kategori" FromRole="Kategori" ToRole="Urun" />
+          <Property Name="Durum" Type="Boolean" />
         </EntityType>
         <EntityType Name="Kullanici">
           <Key>
@@ -272,6 +274,7 @@
           <EntitySetMapping Name="Kategori">
             <EntityTypeMapping TypeName="Model.Kategori">
               <MappingFragment StoreEntitySet="Kategori">
+                <ScalarProperty Name="Durum" ColumnName="Durum" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Ad" ColumnName="Ad" />
                 <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
