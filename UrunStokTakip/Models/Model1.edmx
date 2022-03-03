@@ -98,6 +98,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Sepet_Urun1">
+          <End Role="Urun" Type="Self.Urun" Multiplicity="0..1" />
+          <End Role="Sepet" Type="Self.Sepet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urun">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sepet">
+              <PropertyRef Name="UrunId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Urun_Kategori">
           <End Role="Kategori" Type="Self.Kategori" Multiplicity="0..1" />
           <End Role="Urun" Type="Self.Urun" Multiplicity="*" />
@@ -125,6 +137,10 @@
             <End Role="Kullanici" EntitySet="Kullanici" />
             <End Role="Sepet" EntitySet="Sepet" />
           </AssociationSet>
+          <AssociationSet Name="FK_Sepet_Urun1" Association="Self.FK_Sepet_Urun1">
+            <End Role="Urun" EntitySet="Urun" />
+            <End Role="Sepet" EntitySet="Sepet" />
+          </AssociationSet>
           <AssociationSet Name="FK_Urun_Kategori" Association="Self.FK_Urun_Kategori">
             <End Role="Kategori" EntitySet="Kategori" />
             <End Role="Urun" EntitySet="Urun" />
@@ -141,8 +157,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Aciklama" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Urun" Relationship="Self.FK_Urun_Kategori" FromRole="Kategori" ToRole="Urun" />
           <Property Name="Durum" Type="Boolean" />
+          <NavigationProperty Name="Urun" Relationship="Model.FK_Urun_Kategori" FromRole="Kategori" ToRole="Urun" />
         </EntityType>
         <EntityType Name="Kullanici">
           <Key>
@@ -182,32 +198,6 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <EntityType Name="Urun">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Aciklama" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Fiyat" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Stok" Type="Int32" />
-          <Property Name="Populer" Type="Boolean" />
-          <Property Name="Resim" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="KategoriId" Type="Int32" />
-          <NavigationProperty Name="Kategori" Relationship="Self.FK_Urun_Kategori" FromRole="Urun" ToRole="Kategori" />
-        </EntityType>
-        <Association Name="FK_Urun_Kategori">
-          <End Role="Kategori" Type="Self.Kategori" Multiplicity="0..1" />
-          <End Role="Urun" Type="Self.Urun" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Kategori">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Urun">
-              <PropertyRef Name="KategoriId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Satislar_Kullanici">
           <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="0..1" />
           <End Role="Satislar" Type="Self.Satislar" Multiplicity="*" />
@@ -225,18 +215,22 @@
           <EntitySet Name="Kullanici" EntityType="Self.Kullanici" />
           <EntitySet Name="Satislar" EntityType="Self.Satislar" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="Urun" EntityType="Self.Urun" />
-          <AssociationSet Name="FK_Urun_Kategori" Association="Self.FK_Urun_Kategori">
-            <End Role="Kategori" EntitySet="Kategori" />
-            <End Role="Urun" EntitySet="Urun" />
-          </AssociationSet>
           <AssociationSet Name="FK_Satislar_Kullanici" Association="Self.FK_Satislar_Kullanici">
             <End Role="Kullanici" EntitySet="Kullanici" />
             <End Role="Satislar" EntitySet="Satislar" />
           </AssociationSet>
           <EntitySet Name="Sepet" EntityType="Model.Sepet" />
+          <EntitySet Name="Urun" EntityType="Model.Urun" />
+          <AssociationSet Name="FK_Urun_Kategori" Association="Model.FK_Urun_Kategori">
+            <End Role="Kategori" EntitySet="Kategori" />
+            <End Role="Urun" EntitySet="Urun" />
+          </AssociationSet>
           <AssociationSet Name="FK_Sepet_Kullanici" Association="Model.FK_Sepet_Kullanici">
             <End Role="Kullanici" EntitySet="Kullanici" />
+            <End Role="Sepet" EntitySet="Sepet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sepet_Urun1" Association="Model.FK_Sepet_Urun1">
+            <End Role="Urun" EntitySet="Urun" />
             <End Role="Sepet" EntitySet="Sepet" />
           </AssociationSet>
         </EntityContainer>
@@ -252,7 +246,35 @@
           <Property Name="Resim" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="KullaniciId" Type="Int32" />
           <NavigationProperty Name="Kullanici" Relationship="Model.FK_Sepet_Kullanici" FromRole="Sepet" ToRole="Kullanici" />
+          <NavigationProperty Name="Urun" Relationship="Model.FK_Sepet_Urun1" FromRole="Sepet" ToRole="Urun" />
         </EntityType>
+        <EntityType Name="Urun">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Aciklama" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Fiyat" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Stok" Type="Int32" />
+          <Property Name="Populer" Type="Boolean" />
+          <Property Name="Resim" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="KategoriId" Type="Int32" />
+          <NavigationProperty Name="Kategori" Relationship="Model.FK_Urun_Kategori" FromRole="Urun" ToRole="Kategori" />
+          <NavigationProperty Name="Sepet" Relationship="Model.FK_Sepet_Urun1" FromRole="Urun" ToRole="Sepet" />
+        </EntityType>
+        <Association Name="FK_Urun_Kategori">
+          <End Type="Model.Kategori" Role="Kategori" Multiplicity="0..1" />
+          <End Type="Model.Urun" Role="Urun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategori">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Urun">
+              <PropertyRef Name="KategoriId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Sepet_Kullanici">
           <End Type="Model.Kullanici" Role="Kullanici" Multiplicity="0..1" />
           <End Type="Model.Sepet" Role="Sepet" Multiplicity="*" />
@@ -262,6 +284,18 @@
             </Principal>
             <Dependent Role="Sepet">
               <PropertyRef Name="KullaniciId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sepet_Urun1">
+          <End Type="Model.Urun" Role="Urun" Multiplicity="0..1" />
+          <End Type="Model.Sepet" Role="Sepet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urun">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sepet">
+              <PropertyRef Name="UrunId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -319,20 +353,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Urun">
-            <EntityTypeMapping TypeName="Model.Urun">
-              <MappingFragment StoreEntitySet="Urun">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Ad" ColumnName="Ad" />
-                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
-                <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
-                <ScalarProperty Name="Stok" ColumnName="Stok" />
-                <ScalarProperty Name="Populer" ColumnName="Populer" />
-                <ScalarProperty Name="Resim" ColumnName="Resim" />
-                <ScalarProperty Name="KategoriId" ColumnName="KategoriId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Sepet">
             <EntityTypeMapping TypeName="Model.Sepet">
               <MappingFragment StoreEntitySet="Sepet">
@@ -342,6 +362,20 @@
                 <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
                 <ScalarProperty Name="Adet" ColumnName="Adet" />
                 <ScalarProperty Name="UrunId" ColumnName="UrunId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Urun">
+            <EntityTypeMapping TypeName="Model.Urun">
+              <MappingFragment StoreEntitySet="Urun">
+                <ScalarProperty Name="KategoriId" ColumnName="KategoriId" />
+                <ScalarProperty Name="Resim" ColumnName="Resim" />
+                <ScalarProperty Name="Populer" ColumnName="Populer" />
+                <ScalarProperty Name="Stok" ColumnName="Stok" />
+                <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -21,7 +21,8 @@
                 {
                     <li><a href="/Kullanici/Index">Kullanıcı</a></li>
                     <li><a href="/TümSatislar/Index">Tüm Satışlar</a></li>
-                    <li><a href="/Urun/KritikStok">Kritik Stok @Html.Action("StokCount","Urun")</a></li>
+                    <li><a href="/Urun/KritikStok">Kritik Stok @Html.Action("StokCount", "Urun")</a></li>
+                    <li><a href="/Urun/StokGrafik">Stok Grafiği</a></li>
 
 
                 }
@@ -33,11 +34,11 @@
                 @if (User.IsInRole("U"))
                 {
                     <li><a href="/Satis/Index">Satışlar</a></li>
-                    <li><a href="/Sepet/Index">Sepetim</a></li>
+                    <li><a href="/Sepet/Index"><img src="~/Content/Image/sepet.png" width="30" height="30"/><label style="color:red">@{Html.RenderAction("SepetCount", "Sepet");}</label></a></li>
                 }
 
 
-                <li><a href="/Account/LogOut">Çıkış</a></li>
+                <li><a href="/Account/LogOut">Çıkış Yap</a></li>
             </ul>
         </div>
     </nav>
