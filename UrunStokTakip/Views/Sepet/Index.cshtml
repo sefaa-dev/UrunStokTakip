@@ -95,3 +95,21 @@
     }
 </style>
 
+<script src="~/Scripts/jquery-3.6.0.min.js"></script>
+<script>
+    $(function () {
+        $('.txt').on('change', function () {
+            var miktar = $(this).val();
+            var sepetid = $(this).attr('data-id');
+            $.ajax({
+                url: '/Sepet/AdetYaz',
+                data: { id: sepetid, miktari: miktar },
+                success: function (res) {
+                    document.location.reload();
+                }
+            });
+        });
+    });
+</script>
+
+

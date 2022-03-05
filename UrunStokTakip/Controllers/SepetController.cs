@@ -109,6 +109,33 @@ namespace UrunStokTakip.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        public void AdetYaz(int id, int miktari)
+        {
+            var model = db.Sepet.Find(id);
+            model.Adet = miktari;
+            model.Fiyat = model.Fiyat * model.Adet;
+            db.SaveChanges();
+        }
+        public ActionResult Sil(int id)
+        {
+            var sil = db.Sepet.Find(id);
+            db.Sepet.Remove(sil);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public ActionResult HepsiniSil()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var kullaniciadi = User.Identity.Name;
+                var model = db.Kullanici.FirstOrDefault(x => x.Email == kullaniciadi);
+                var sil = db.Sepet.Where(x => x.KullaniciId == model.Id);
+                db.Sepet.RemoveRange(sil);
+                db.SaveChanges();
+                return RedirectToAction("Index");
 
+            }
+            return HttpNotFound();
+        }
     }
 }
