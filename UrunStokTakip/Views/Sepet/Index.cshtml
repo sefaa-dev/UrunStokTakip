@@ -25,7 +25,18 @@
         {
         <tr>
             <td>@item.Urun.Ad</td>
-            <td>@item.Adet</td>
+            <td>
+                <div>
+                    @Html.ActionLink("-", "azalt", new { id = item.Id }, new { @class = "btn btn-info btn-sm azalt" })
+                </div>
+                <div>
+                    @Html.TextBoxFor(x => item.Adet, new { @class = "txt", data_id = item.Id })
+                </div>
+                <div>
+                    @Html.ActionLink("+", "arttir", new { id = item.Id }, new { @class = "btn btn-info btn-sm arttir" })
+                </div>
+
+            </td>
             <td>@item.Urun.Fiyat</td>
             <td>@Convert.ToDateTime(item.Tarih).ToString("dd/MM/yyyy")</td>
             <td><img src="~/Content/Image/@item.Urun.Resim" width="90" height="90" /></td>
@@ -56,4 +67,31 @@
 <div class="tox-form__group">
     <a href="/Sepet/HepsiniSil" class="btn btn-danger form-control">Tümünü Sil</a>
 </div>
+
+<style>
+    .txt{
+        line-height:18px;
+        width:50px!important;
+        height:32px;
+        font-size:14px;
+        text-align:center;
+        border:solid 1px #ccc;
+        margin-left:23px;
+    }
+    .arttir {
+        display: block;
+        cursor: pointer;
+        border: solid 1px #ccc;
+        position: absolute;
+        margin-top: -32px;
+        margin-left: 75px;
+    }
+    .azalt{
+        display:block;
+        cursor:pointer;
+        border:solid 1px #ccc;
+        position: absolute;
+        margin-right: 95px;
+    }
+</style>
 

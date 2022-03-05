@@ -87,5 +87,28 @@ namespace UrunStokTakip.Controllers
             }
             return HttpNotFound();
         }
+        public ActionResult arttir(int id)
+        {
+            var model = db.Sepet.Find(id);
+            model.Adet++;
+            model.Fiyat = model.Fiyat * model.Adet;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult azalt(int id)
+        {
+            var model = db.Sepet.Find(id);
+            if (model.Adet == 1)
+            {
+                db.Sepet.Remove(model);
+                db.SaveChanges();
+            }
+            model.Adet--;
+            model.Fiyat = model.Fiyat * model.Adet;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
     }
 }
