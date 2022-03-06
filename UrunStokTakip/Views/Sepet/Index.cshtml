@@ -44,7 +44,7 @@
                 @if (User.IsInRole("U"))
                 {
                 <td>@Html.ActionLink("Sil", "Sil", new { id = item.Id }, new { @class = "btn btn-danger", onclick = "return confirm('Silmek İstiyor musunuz ?')" })</td>
-                <td><a href="/Satislar/SatinAl/@item.Id" class="btn btn-success">Satın Al</a></td>
+                <td><a href="/Satis/SatinAl/@item.Id" class="btn btn-success">Satın Al</a></td>
 
 
             }

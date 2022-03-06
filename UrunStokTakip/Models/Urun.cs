@@ -17,6 +17,7 @@ namespace UrunStokTakip.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Urun()
         {
+            this.Satislar = new HashSet<Satislar>();
             this.Sepet = new HashSet<Sepet>();
         }
     
@@ -30,6 +31,8 @@ namespace UrunStokTakip.Models
         public Nullable<int> KategoriId { get; set; }
     
         public virtual Kategori Kategori { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Satislar> Satislar { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sepet> Sepet { get; set; }
     }
