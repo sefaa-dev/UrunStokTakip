@@ -1,0 +1,11 @@
+# UrunStokTakip
+![Kullanıcı Kayıt - Giris](https://user-images.githubusercontent.com/73781928/172441885-14b50e1b-ff97-4c8e-ac13-fc70924c77d0.jpeg)
+![Kullanıcı bilgi güncelleme](https://user-images.githubusercontent.com/73781928/172441904-552988d7-8e5a-41f2-af4d-b247a27b6299.jpeg)
+![DB - First - Model](https://user-images.githubusercontent.com/73781928/172441929-7702d75a-40e5-4973-9d43-5f8b6dff7375.jpeg)
+![Admin yeni ürün ekle](https://user-images.githubusercontent.com/73781928/172441932-abe9cf7a-6dda-4e2c-abd9-51039262fc46.jpeg)
+![Sepetim](https://user-images.githubusercontent.com/73781928/172441955-ca9a5e47-49c4-4868-ae07-4965541f0c85.jpeg)
+![Siparişlerim](https://user-images.githubusercontent.com/73781928/172441963-9fd6c716-b2bd-4333-83bf-fe9e7aab1074.jpeg)
+![Stoktaki Ürünler](https://user-images.githubusercontent.com/73781928/172441977-dd0d219d-3ce3-4f89-bab4-0e3b3e50f431.jpeg)
+![Stok bilgilendirme](https://user-images.githubusercontent.com/73781928/172441986-1ca78f31-1ca1-4b11-bf45-481a04a22e3f.jpeg)
+![Istatistikler](https://user-images.githubusercontent.com/73781928/172441996-b2a76937-d242-4941-bcf1-bcf7a9af06fd.jpeg)
+![Satilan Ürünler](https://user-images.githubusercontent.com/73781928/172442165-9aa890ca-9c09-49a3-818d-5d8d914a7fa7.jpeg)
